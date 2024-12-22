@@ -20,8 +20,205 @@
 
 ---
 
-- Example link
+# Example link
 	- http://thdtjsdn.com:49310/app_tool/html_page/DrawCanvas/index.html
+
+---
+
+# Sample source
+
+```javascript
+const APIS = TAPI.w.apis.CANVASContextDraw;
+
+const CANVAS = TAPI.ge('ID-CANVAS');
+const CONTEXT = CANVAS.getContext('2d');
+
+const EVENT_LISTENERS = {
+	clear: function(){
+		CONTEXT.clearRect(0, 0, CANVAS.width, CANVAS.height);
+	}
+	, drawArc: function () {
+		
+		if(TAPI.gec('ID-CHECKBOX--PATH-BEGIN')){ CONTEXT.beginPath(); }
+		APIS.drawArc(CONTEXT, APIS_RANDOM_HEXCOLOR(), getAlpha_Random(), 2, APIS_RANDOM_HEXCOLOR(), getAlpha_Random(), getX_Random(), getY_Random(), getRadius_Random(), getArc_Random(), Math.PI, false);
+		if(TAPI.gec('ID-CHECKBOX--PATH-CLOSE')){ CONTEXT.closePath(); }
+
+		if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(arguments.callee); }
+	}
+
+	, drawCircle: function () {
+		
+		if(TAPI.gec('ID-CHECKBOX--PATH-BEGIN')){ CONTEXT.beginPath(); }
+		APIS.drawCircle_Fill(CONTEXT, APIS_RANDOM_HEXCOLOR(), getAlpha_Random(), getX_Random(), getY_Random(), getRadius_Random());
+		if(TAPI.gec('ID-CHECKBOX--PATH-CLOSE')){ CONTEXT.closePath(); }
+
+		if(TAPI.gec('ID-CHECKBOX--PATH-BEGIN')){ CONTEXT.beginPath(); }
+		APIS.drawCircle_Line(CONTEXT, 5, APIS_RANDOM_HEXCOLOR(), getAlpha_Random(), getX_Random(), getY_Random(), getRadius_Random());
+		if(TAPI.gec('ID-CHECKBOX--PATH-CLOSE')){ CONTEXT.closePath(); }
+
+		if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(arguments.callee); }
+	}
+
+	, drawLine: function () {
+		
+		if(TAPI.gec('ID-CHECKBOX--PATH-BEGIN')){ CONTEXT.beginPath(); }
+		APIS.drawLine(CONTEXT, 5, APIS_RANDOM_HEXCOLOR(), getAlpha_Random(), getX_Random(), getY_Random(), getX_Random(), getY_Random());
+		if(TAPI.gec('ID-CHECKBOX--PATH-CLOSE')){ CONTEXT.closePath(); }
+
+		if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(arguments.callee); }
+	}
+
+	, drawLineGradient: function () {
+		
+		var colorStops = [
+			0.0, APIS_RANDOM_HEXCOLOR(),
+			0.5, APIS_RANDOM_HEXCOLOR(),
+			1.0, APIS_RANDOM_HEXCOLOR()
+		];
+
+		if(TAPI.gec('ID-CHECKBOX--PATH-BEGIN')){ CONTEXT.beginPath(); }
+		APIS.drawLine_Gradient(CONTEXT, 5, 1.0, getX_Random(), getY_Random(), getX_Random(), getY_Random(), colorStops);
+		if(TAPI.gec('ID-CHECKBOX--PATH-CLOSE')){ CONTEXT.closePath(); }
+
+		if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(arguments.callee); }
+	}
+
+	, drawPolygon: function () {
+		
+		if(TAPI.gec('ID-CHECKBOX--PATH-BEGIN')){ CONTEXT.beginPath(); }
+		var a = [];
+		var i=0, iLen=APIS_RANDOM_NUMBER(5, 10);
+		for(; i<iLen; ++i){ a.push(getX_Random(), getY_Random()); }
+		APIS.drawPolygon(CONTEXT, APIS_RANDOM_HEXCOLOR(), getAlpha_Random(), 2, APIS_RANDOM_HEXCOLOR(), getAlpha_Random(), a);
+		if(TAPI.gec('ID-CHECKBOX--PATH-CLOSE')){ CONTEXT.closePath(); }
+
+		if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(arguments.callee); }
+	}
+
+	, drawPolygonGradientLinear: function () {
+		
+		if(TAPI.gec('ID-CHECKBOX--PATH-BEGIN')){ CONTEXT.beginPath(); }
+		var a = [];
+		var i=0, iLen=APIS_RANDOM_NUMBER(5, 10);
+		for(; i<iLen; ++i){ a.push(getX_Random(), getY_Random()); }
+
+		var colorStops = [
+			0.0, APIS_RANDOM_HEXCOLOR(),
+			0.5, APIS_RANDOM_HEXCOLOR(),
+			1.0, APIS_RANDOM_HEXCOLOR()
+		];
+
+		APIS.drawPolygon_Gradient_Linear(CONTEXT, getAlpha_Random(), 2, APIS_RANDOM_HEXCOLOR(), getAlpha_Random(), a, 150, 150, 350, 250, colorStops);
+		if(TAPI.gec('ID-CHECKBOX--PATH-CLOSE')){ CONTEXT.closePath(); }
+
+		if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(arguments.callee); }
+	}
+	, drawPolygonGradientLinearCenter: function () {
+		
+		if(TAPI.gec('ID-CHECKBOX--PATH-BEGIN')){ CONTEXT.beginPath(); }
+		var a = [];
+		var i=0, iLen=APIS_RANDOM_NUMBER(5, 10);
+		for(; i<iLen; ++i){ a.push(getX_Random(), getY_Random()); }
+
+		var colorStops = [
+			0.0, APIS_RANDOM_HEXCOLOR(),
+			0.5, APIS_RANDOM_HEXCOLOR(),
+			1.0, APIS_RANDOM_HEXCOLOR()
+		];
+
+		APIS.drawPolygon_Gradient_Linear_Center(CONTEXT, getAlpha_Random(), 2, APIS_RANDOM_HEXCOLOR(), getAlpha_Random(), a, colorStops);
+		if(TAPI.gec('ID-CHECKBOX--PATH-CLOSE')){ CONTEXT.closePath(); }
+
+		if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(arguments.callee); }
+	}
+
+	, drawRegularPolygon: function () {
+		if(TAPI.gec('ID-CHECKBOX--PATH-BEGIN')){ CONTEXT.beginPath(); }
+		APIS.drawRegularPolygon(CONTEXT, APIS_RANDOM_HEXCOLOR(), getAlpha_Random(), 1, APIS_RANDOM_HEXCOLOR(), getAlpha_Random(), getX_Random(), getY_Random(), getRadius_Random(), getSides_Random());
+		if(TAPI.gec('ID-CHECKBOX--PATH-CLOSE')){ CONTEXT.closePath(); }
+
+		if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(arguments.callee); }
+	}
+
+	, drawPolyline: function () {
+		
+		if(TAPI.gec('ID-CHECKBOX--PATH-BEGIN')){ CONTEXT.beginPath(); }
+		var a = [];
+		var i=0, iLen=APIS_RANDOM_NUMBER(5, 10);
+		for(; i<iLen; ++i){ a.push(getX_Random(), getY_Random()); }
+		APIS.drawPolyline(CONTEXT, 2, APIS_RANDOM_HEXCOLOR(), getAlpha_Random(), a);
+		if(TAPI.gec('ID-CHECKBOX--PATH-CLOSE')){ CONTEXT.closePath(); }
+
+		if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(arguments.callee); }
+	}
+	, drawPolylineGradientLinear: function () {
+		
+		if(TAPI.gec('ID-CHECKBOX--PATH-BEGIN')){ CONTEXT.beginPath(); }
+		var a = [];
+		var i=0, iLen=APIS_RANDOM_NUMBER(5, 10);
+		for(; i<iLen; ++i){ a.push(getX_Random(), getY_Random()); }
+
+		var colorStops = [
+			0.0, APIS_RANDOM_HEXCOLOR(),
+			0.5, APIS_RANDOM_HEXCOLOR(),
+			1.0, APIS_RANDOM_HEXCOLOR()
+		];
+
+		APIS.drawPolyline_Gradient_Linear(CONTEXT, 2, getAlpha_Random(), a, 150, 150, 350, 250, colorStops);
+		if(TAPI.gec('ID-CHECKBOX--PATH-CLOSE')){ CONTEXT.closePath(); }
+
+		if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(arguments.callee); }
+	}
+	, drawPolylineGradientLinearCenter: function () {
+		
+		if(TAPI.gec('ID-CHECKBOX--PATH-BEGIN')){ CONTEXT.beginPath(); }
+		var a = [];
+		var i=0, iLen=APIS_RANDOM_NUMBER(5, 10);
+		for(; i<iLen; ++i){ a.push(getX_Random(), getY_Random()); }
+
+		var colorStops = [
+			0.0, APIS_RANDOM_HEXCOLOR(),
+			0.5, APIS_RANDOM_HEXCOLOR(),
+			1.0, APIS_RANDOM_HEXCOLOR()
+		];
+
+		APIS.drawPolyline_Gradient_Linear_Center(CONTEXT, 2, getAlpha_Random(), a, colorStops);
+		if(TAPI.gec('ID-CHECKBOX--PATH-CLOSE')){ CONTEXT.closePath(); }
+
+		if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(arguments.callee); }
+	}
+
+	, drawGradientCircular: function () {
+		
+		var colorStops = [
+			0.0, APIS_RANDOM_HEXCOLOR(),
+			0.5, APIS_RANDOM_HEXCOLOR(),
+			1.0, APIS_RANDOM_HEXCOLOR()
+		];
+
+		if(TAPI.gec('ID-CHECKBOX--PATH-BEGIN')){ CONTEXT.beginPath(); }
+		APIS.drawGradient_Circular(CONTEXT, getX_Random(), getY_Random(), getRadius_Random(), getRadius_Random(), colorStops);
+		if(TAPI.gec('ID-CHECKBOX--PATH-CLOSE')){ CONTEXT.closePath(); }
+
+		if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(arguments.callee); }
+	}
+
+	, drawGradientLinear: function () {
+		
+		var colorStops = [
+			0.0, APIS_RANDOM_HEXCOLOR(),
+			0.5, APIS_RANDOM_HEXCOLOR(),
+			1.0, APIS_RANDOM_HEXCOLOR()
+		];
+
+		if(TAPI.gec('ID-CHECKBOX--PATH-BEGIN')){ CONTEXT.beginPath(); }
+		APIS.drawGradient_Linear(CONTEXT, getX_Random(), getY_Random(), getX_Random(), getY_Random(), colorStops);
+		if(TAPI.gec('ID-CHECKBOX--PATH-CLOSE')){ CONTEXT.closePath(); }
+
+		if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(arguments.callee); }
+	}
+};
+```
 
 ---
 
