@@ -20,12 +20,10 @@
 
 ---
 
-# Example link
-	- http://thdtjsdn.com:49310/app_tool/html_page/DrawCanvas/index.html
-
----
-
 # Sample source
+
+- Example link
+	- http://thdtjsdn.com:49310/app_tool/html_page/DrawCanvas/index.html
 
 ```javascript
 const APIS = TAPI.w.apis.CANVASContextDraw;
