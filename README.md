@@ -215,6 +215,44 @@ const EVENT_LISTENERS = {
 
 		if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(arguments.callee); }
 	}
+
+	, drawBitmap: function(){
+		var img = new Image();
+		function drawImage(bitmap){
+			APIS.drawImageBitmap(CONTEXT, bitmap, getX_Random(), getY_Random(), 100, 100); // 이미지 객체, x 좌표, y 좌표, 너비, 높이
+			if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(function(){drawImage(bitmap);}); }
+		}
+		img.onload = function() { createImageBitmap(img).then(drawImage); };
+		img.src = 'http://thdtjsdn.com:49310/app_thdtjsdn/html_page/Resume/index.photo.png'; // 사용할 이미지의 URL
+	}
+	, drawBitmapRotation: function(){
+		var img = new Image();
+		function drawImage(bitmap){
+			APIS.drawImageBitmap_Rotation(CONTEXT, bitmap, getX_Random(), getY_Random(), 100, 100, getRotation_Random()); // 비트맵 객체, x 좌표, y 좌표, 너비, 높이, 45도 회전
+			if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(function(){drawImage(bitmap);}); }
+		}
+		img.onload = function() { createImageBitmap(img).then(drawImage); };
+		img.src = 'http://thdtjsdn.com:49310/app_thdtjsdn/html_page/Resume/index.photo.png'; // 사용할 이미지의 URL
+	}
+
+	, drawImage: function(){
+		var img = new Image();
+		function drawImage(){
+			APIS.drawImage(CONTEXT, img, getX_Random(), getY_Random(), 100, 100); // 이미지 객체, x 좌표, y 좌표, 너비, 높이
+			if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(arguments.callee); }
+		}
+		img.onload = function() { drawImage() };
+		img.src = 'http://thdtjsdn.com:49310/app_thdtjsdn/html_page/Resume/index.photo.png'; // 사용할 이미지의 URL
+	}
+	, drawImageRotation: function(){
+		var img = new Image();
+		function drawImage(){
+			APIS.drawImage_Rotation(CONTEXT, img, getX_Random(), getY_Random(), 100, 100, getRotation_Random()); // 이미지 객체, x 좌표, y 좌표, 너비, 높이, 45도 회전
+			if(TAPI.gec('ID-CHECKBOX--CONTINUE-CREATE')){ requestAnimationFrame(arguments.callee); }
+		}
+		img.onload = function() { drawImage(); };
+		img.src = 'http://thdtjsdn.com:49310/app_thdtjsdn/html_page/Resume/index.photo.png'; // 사용할 이미지의 URL
+	}
 };
 ```
 
@@ -223,53 +261,42 @@ const EVENT_LISTENERS = {
 # API 목록(필요할 법한 목록만)
 
 - drawArc(context, fillStyle, globalAlpha_Fill, lineWidth, strokeStyle, globalAlpha_Line, cX, cY, r, sA, eA, counterClockWise)
-
 - drawArc_Fill(context, fillStyle, globalAlpha, cX, cY, r, sA, eA, counterClockWise)
-
 - drawArc_Line(context, lineWidth, strokeStyle, globalAlpha, cX, cY, r, sA, eA, counterClockWise)
 
 - drawCircle(context, fillStyle, globalAlpha_Fill, lineWidth, strokeStyle, globalAlpha_Line, cX, cY, r)
-
 - drawCircle_Fill(context, fillStyle, globalAlpha, cX, cY, r)
-
 - drawCircle_Line(context, lineWidth, strokeStyle, globalAlpha, cX, cY, r)
 
 - drawGradient_Circular(context, cX, cY, innerRadius, outerRadius, colorStops)
 
 - drawGradient_Linear(context, x0, y0, x1, y1, colorStops)
 
-- drawImage(context)
+- drawImage(context, img, dx, dy, dw, dh)
+- drawImage_Rotation(context, img, dx, dy, dw, dh, rotation)
+- drawImageBitmap(context, bitmap, dx, dy, dw, dh)
+- drawImageBitmap_Rotation(context, bitmap, dx, dy, dw, dh, rotation)
 
 - drawLine(context, lineWidth, strokeStyle, globalAlpha, sX, sY, eX, eY)
-
 - drawLine_Gradient(context, lineWidth, globalAlpha, sX, sY, eX, eY, colorStops)
 
 - drawPolygon(context, fillStyle, globalAlpha_Fill, lineWidth, strokeStyle, globalAlpha_Line, a)
-
 - drawPolygon_Gradient_Linear(context, globalAlpha_Fill, lineWidth, strokeStyle, globalAlpha_Line, a, sX, sY, eX, eY, colorStops)
-
 - drawPolygon_Gradient_Linear_Center(context, globalAlpha_Fill, lineWidth, strokeStyle, globalAlpha_Line, a, colorStops)
 
 - drawPolyline(context, lineWidth, strokeStyle, globalAlpha, a)
-
 - drawPolyline_Gradient_Linear(context, lineWidth, globalAlpha, a, sX, sY, eX, eY, colorStops)
-
 - drawPolyline_Gradient_Linear_Center(context, lineWidth, globalAlpha, a, colorStops)
 
 - drawRegularPolygon(context, fillStyle, globalAlpha_Fill, lineWidth, strokeStyle, globalAlpha_Line, cX, cY, r, sides)
-
-- drawPolygon(context, fillStyle, globalAlpha_Fill, lineWidth, strokeStyle, globalAlpha_Line, points);
+- drawRegularPolygon_Gradient_Linear(context, globalAlpha_Fill, lineWidth, strokeStyle, globalAlpha_Line, cX, cY, r, sides, rotation, sX, sY, eX, eY, colorStops) {
 
 - drawRect(contexto, fillStyle, globalAlpha_Fill, lineWidth, strokeStyle, globalAlpha_Line, l, t, r, b)
-
 - drawRect_Fill(contexto, fillStyle, globalAlpha, l, t, r, b)
-
 - drawRect_Line(contexto, lineWidth, strokeStyle, globalAlpha, l, t, r, b)
 
 - drawText(context, fillStyle, globalAlpha_Fill, lineWidth, strokeStyle, globalAlpha_Line, font, text, x, y, maxWidth)
-
 - drawText_Fill(context, fillStyle, globalAlpha, font, text, x, y, maxWidth)
-
 - drawText_Line(context, lineWidth, strokeStyle, globalAlpha, font, text, x, y, maxWidth)
 
 ---
